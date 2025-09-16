@@ -10,9 +10,22 @@
 		34BFB9B52E796ED100DBFA1B /* Numbers_TestTask_Nechvola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Numbers_TestTask_Nechvola.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		34BFBC0D2E79882100DBFA1B /* Exceptions for "Numbers_TestTask_Nechvola" folder in "Numbers_TestTask_Nechvola" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Numbers-TestTask-Nechvola-Info.plist",
+			);
+			target = 34BFB9B42E796ED100DBFA1B /* Numbers_TestTask_Nechvola */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		34BFB9B72E796ED100DBFA1B /* Numbers_TestTask_Nechvola */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				34BFBC0D2E79882100DBFA1B /* Exceptions for "Numbers_TestTask_Nechvola" folder in "Numbers_TestTask_Nechvola" target */,
+			);
 			path = Numbers_TestTask_Nechvola;
 			sourceTree = "<group>";
 		};
@@ -253,6 +266,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Numbers-TestTask-Nechvola-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Numbers;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -294,6 +308,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Numbers-TestTask-Nechvola-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Numbers;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
