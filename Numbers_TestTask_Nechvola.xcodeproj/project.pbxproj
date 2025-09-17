@@ -6,13 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		34BFBC282E79AB7000DBFA1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34BFBC262E79AB7000DBFA1B /* Model.xcdatamodeld */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		34BFB9B52E796ED100DBFA1B /* Numbers_TestTask_Nechvola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Numbers_TestTask_Nechvola.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		34BFBC272E79AB7000DBFA1B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,7 +32,6 @@
 		34BFB9AC2E796ED100DBFA1B = {
 			isa = PBXGroup;
 			children = (
-				34BFBC262E79AB7000DBFA1B /* Model.xcdatamodeld */,
 				34BFB9B72E796ED100DBFA1B /* Numbers_TestTask_Nechvola */,
 				34BFB9B62E796ED100DBFA1B /* Products */,
 			);
@@ -125,7 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34BFBC282E79AB7000DBFA1B /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,19 +347,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		34BFBC262E79AB7000DBFA1B /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				34BFBC272E79AB7000DBFA1B /* Model.xcdatamodel */,
-			);
-			currentVersion = 34BFBC272E79AB7000DBFA1B /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 34BFB9AD2E796ED100DBFA1B /* Project object */;
 }
