@@ -41,13 +41,11 @@ final class NumberFactService: NumberFactServiceProtocol {
     // MARK: - Protocol Methods
     func getFact(for number: Int) async -> Result<String, CustomError> {
         let url = URL(string: Path.factByNumber(number).path)
-        
         return await baseRequestService.getDataModel(url: url, model: String.self)
     }
     
     func getRandomFact() async -> Result<String, CustomError> {
         let url = URL(string: Path.randomNumberFact.path)
-        
         return await baseRequestService.getDataModel(url: url, model: String.self)
     }
 }
