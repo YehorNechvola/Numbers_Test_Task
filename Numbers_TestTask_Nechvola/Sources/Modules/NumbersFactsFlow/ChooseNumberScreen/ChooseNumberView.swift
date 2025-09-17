@@ -22,12 +22,12 @@ struct ChooseNumberView: View {
             VStack(alignment: .center) {
                 
                 // MARK: - Number Input Field
-                TextField(ChooseNumberConstants.enterNumberPlaceholder, text: $userInput)
+                TextField(Constants.enterNumberPlaceholder, text: $userInput)
                     .focused($isFocused)
                     .keyboardType(.numberPad)
-                    .padding(ChooseNumberConstants.textFieldPadding)
-                    .background(ChooseNumberConstants.textFieldBackground)
-                    .cornerRadius(ChooseNumberConstants.cornerRadius)
+                    .padding(Constants.textFieldPadding)
+                    .background(Constants.textFieldBackground)
+                    .cornerRadius(Constants.cornerRadius)
                     .padding()
                 
                 // MARK: - Get Fact Button
@@ -37,12 +37,12 @@ struct ChooseNumberView: View {
                         await viewModel.getFact(by: userInput)
                     }
                 } label: {
-                    Text(ChooseNumberConstants.getFactTitle)
-                        .foregroundStyle(ChooseNumberConstants.buttonTextColor)
-                        .frame(width: ChooseNumberConstants.buttonWidth)
-                        .padding(ChooseNumberConstants.textFieldPadding)
-                        .background(userInput.isEmpty ? ChooseNumberConstants.disabledButtonColor : ChooseNumberConstants.primaryButtonColor)
-                        .cornerRadius(ChooseNumberConstants.cornerRadius)
+                    Text(Constants.getFactTitle)
+                        .foregroundStyle(Constants.buttonTextColor)
+                        .frame(width: Constants.buttonWidth)
+                        .padding(Constants.textFieldPadding)
+                        .background(userInput.isEmpty ? Constants.disabledButtonColor : Constants.primaryButtonColor)
+                        .cornerRadius(Constants.cornerRadius)
                         .disabled(userInput.isEmpty)
                 }
                 
@@ -54,25 +54,25 @@ struct ChooseNumberView: View {
                     }
                 } label: {
                     HStack {
-                        Text(ChooseNumberConstants.getRandomFactTitle)
-                            .foregroundStyle(ChooseNumberConstants.buttonTextColor)
-                            .frame(width: ChooseNumberConstants.buttonWidth)
-                            .padding(ChooseNumberConstants.textFieldPadding)
-                            .background(ChooseNumberConstants.primaryButtonColor)
-                            .cornerRadius(ChooseNumberConstants.cornerRadius)
+                        Text(Constants.getRandomFactTitle)
+                            .foregroundStyle(Constants.buttonTextColor)
+                            .frame(width: Constants.buttonWidth)
+                            .padding(Constants.textFieldPadding)
+                            .background(Constants.primaryButtonColor)
+                            .cornerRadius(Constants.cornerRadius)
                     }
                 }
                 
                 // MARK: - Loading Indicator
                 ProgressView()
-                    .padding(ChooseNumberConstants.progressPadding)
-                    .cornerRadius(ChooseNumberConstants.cornerRadius)
+                    .padding(Constants.progressPadding)
+                    .cornerRadius(Constants.cornerRadius)
                     .opacity(viewModel.isLoading ? 1 : 0)
                 
                 // MARK: - History Section
                 List {
-                    Section(header: viewModel.history.isEmpty ? nil : Text(ChooseNumberConstants.historyTitle)
-                        .font(.system(size: ChooseNumberConstants.headerFontSize, weight: .bold))
+                    Section(header: viewModel.history.isEmpty ? nil : Text(Constants.historyTitle)
+                        .font(.system(size: Constants.headerFontSize, weight: .bold))
                     ) {
                         ForEach(viewModel.history, id: \.self) { item in
                             Text(item.fact)
@@ -96,6 +96,35 @@ struct ChooseNumberView: View {
                     DetailFactView(fact: fact)
                 }
             }
+            
+            // MARK: - Show Errow
+            .overlay(alignment: .top) {
+                if viewModel.loadFailed {
+                    showErrorBanner()
+                }
+            }
+            .animation(.easeInOut(duration: Constants.animationDuration), value: viewModel.loadFailed)
         }
+    }
+    
+    // MARK: - Private Methods
+    @ViewBuilder
+    private func showErrorBanner() -> some View {
+        VStack {
+            Text(Constants.errorMessage)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.red)
+                .cornerRadius(Constants.cornerRadius)
+                .padding()
+                .onTapGesture {
+                    withAnimation {
+                        viewModel.loadFailed = false
+                    }
+                }
+            Spacer()
+        }
+        .transition(.move(edge: .top))
     }
 }

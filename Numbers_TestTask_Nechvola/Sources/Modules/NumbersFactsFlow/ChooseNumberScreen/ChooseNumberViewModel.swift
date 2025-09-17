@@ -6,7 +6,6 @@
 //
 
 import Foundation
-//import SwiftUI
 
 @MainActor
 protocol ChooseNumberViewModelProtocol: ObservableObject {
@@ -26,9 +25,11 @@ final class ChooseNumberViewModel: ChooseNumberViewModelProtocol {
     // MARK: - Properties
     private let numberFactService: NumberFactServiceProtocol
     private let numberFactsDataBaseManager: LocalDataStorable
+    private var hideErrorTask: Task<Void, Never>? = nil
     
     // MARK: - Observed Properties
     @Published var isLoading: Bool = false
+    @Published var loadFailed: Bool = false
     @Published var history: [NumberFact] = []
     @Published var path: [Route] = []
     
@@ -42,12 +43,14 @@ final class ChooseNumberViewModel: ChooseNumberViewModelProtocol {
     // MARK: - Protocol Methods
     func getFact(by userInput: String) async {
         guard let userInputNumber = Int(userInput) else { return }
+        loadFailed = false
         isLoading = true
         let result = await numberFactService.getFact(for: userInputNumber)
         handleResult(result)
     }
     
     func getRandomFact() async {
+        loadFailed = false
         isLoading = true
         let result = await numberFactService.getRandomFact()
         handleResult(result)
@@ -61,10 +64,15 @@ final class ChooseNumberViewModel: ChooseNumberViewModelProtocol {
     private func handleResult(_ result: Result<String, CustomError>) {
         switch result {
         case .success(let fact):
+            loadFailed = false
             let numberString = extractLeadingNumber(from: fact) ?? ""
             numberFactsDataBaseManager.addNumberFact(number: numberString, fact: fact)
             history = numberFactsDataBaseManager.allFacts().reversed()
         case .failure(let error):
+            hideErrorTask?.cancel()
+            loadFailed = true
+            createErrorTask()
+            
             print(error.localizedDescription)
         }
         isLoading = false
@@ -75,5 +83,20 @@ final class ChooseNumberViewModel: ChooseNumberViewModelProtocol {
             return nil
         }
         return String(numberString)
+    }
+    
+    private func createErrorTask() {
+        hideErrorTask = Task {
+            do {
+                try await Task.sleep(nanoseconds: 3_000_000_000)
+                try Task.checkCancellation()
+                
+                await MainActor.run {
+                    loadFailed = false
+                }
+            } catch {
+                print("Task was canceled")
+            }
+        }
     }
 }

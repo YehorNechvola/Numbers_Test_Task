@@ -9,12 +9,13 @@ import SwiftUI
 
 extension ChooseNumberView {
     
-    enum ChooseNumberConstants {
+    enum Constants {
         // MARK: - Texts
         static let enterNumberPlaceholder = "Enter your number"
         static let getFactTitle = "Get Fact"
         static let getRandomFactTitle = "Get Random Fact"
         static let historyTitle = "History"
+        static let errorMessage = "Ooops... something went wrong..."
         
         // MARK: - Sizes
         static let buttonWidth: CGFloat = 140
@@ -28,5 +29,8 @@ extension ChooseNumberView {
         static let primaryButtonColor = Color.green.opacity(0.8)
         static let disabledButtonColor = Color.gray
         static let buttonTextColor = Color.white
+        
+        // MARK: - Animations
+        static let animationDuration: Double = 0.7
     }
 }
